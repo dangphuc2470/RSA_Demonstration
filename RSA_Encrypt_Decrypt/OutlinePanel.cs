@@ -9,9 +9,9 @@ namespace RSA_Encrypt_Decrypt
     using System.Drawing;
     using System.Windows.Forms;
 
-    public class RoundedPanel : Panel
+    public class OutlinePanel : Panel
     {
-        public RoundedPanel()
+        public OutlinePanel()
         {
             // Set the panel properties
             this.BackColor = Color.White; // Set the background color
