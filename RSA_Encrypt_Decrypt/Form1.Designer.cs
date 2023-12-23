@@ -502,6 +502,7 @@
             btEncrypt.Text = "Encrypt";
             btEncrypt.TextColor = Color.FromArgb(98, 96, 51);
             btEncrypt.UseVisualStyleBackColor = false;
+            btEncrypt.Click += btEncrypt_Click;
             // 
             // label11
             // 

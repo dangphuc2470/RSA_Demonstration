@@ -1,4 +1,4 @@
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Numerics;
 
 namespace RSA_Encrypt_Decrypt
@@ -74,5 +74,31 @@ namespace RSA_Encrypt_Decrypt
             catch { }
         }
 
+        private void btEncrypt_Click(object sender, EventArgs e)
+        {
+            // Để test cho nhanh
+            //btGenerate_Click(sender, e);
+            //tbE.Text = "65537";
+            //btApply_Click(sender, e);
+
+
+            tbSegment.Clear();
+            string input = rtbInput.Text;
+            for (int i = 0; i < input.Length; i += 2)
+            {
+                if (i + 1 < input.Length)
+                {
+                    string pair = input.Substring(i, 2);
+                    tbSegment.Text += pair;
+                }
+                else
+                {
+                    string singleChar = input.Substring(i, 1) + " "; // Thêm dấu " " cho ký tự cuối cùng nếu độ dài chuỗi là số lẻ
+                    tbSegment.Text += singleChar;
+                }
+                if (i + 2 < input.Length)
+                    tbSegment.Text += " # ";
+            }
+        }
     }
 }
