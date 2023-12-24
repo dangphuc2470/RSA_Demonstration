@@ -10,9 +10,7 @@ namespace RSA_Encrypt_Decrypt
 {
     class RSA_Class
     {
-        static Random random = new Random();
-
-        static bool IsPrime(BigInteger number)
+        public static bool IsPrime(BigInteger number)
         {
             if (number <= 1)
                 return false;
@@ -30,8 +28,9 @@ namespace RSA_Encrypt_Decrypt
             return true;
         }
 
-        public BigInteger GenerateRandomPrime(int min, int max)
+        public static BigInteger GenerateRandomPrime(int min, int max)
         {
+            Random random = new Random();
             BigInteger randomNumber;
             do
             {
@@ -56,7 +55,8 @@ namespace RSA_Encrypt_Decrypt
         // Hàm tìm số e hợp lệ dựa trên phi(n)
         public static BigInteger FindValidE(BigInteger phiN)
         {
-            int[] e = [3, 5, 17, 65537]; // Starting from a small prime number
+            // Chỉ cần tìm 
+            int[] e = [3, 5, 17, 257, 65537]; 
             for (int i = 0; i < e.Length; i++)
             { 
                 if (phiN % e[i] != 0)
@@ -74,7 +74,7 @@ namespace RSA_Encrypt_Decrypt
             }
             else
             {
-                DialogResult dialog = MessageBox.Show("Invalid \"e\", try again or generating a valid one?", "Error", MessageBoxButtons.OKCancel);
+                DialogResult dialog = MessageBox.Show("Invalid \"e\", do you want to generate valid one?", "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 if (dialog == DialogResult.OK)
                     return FindValidE(phiN);
                 return 0;
@@ -92,11 +92,11 @@ namespace RSA_Encrypt_Decrypt
 
             while (e > 1)
             {
-                // q is quotient
+                // q là thương số
                 q = e / phi;
                 t = phi;
 
-                // phi is remainder now, process same as Euclid's algo
+                // phi là phần dư, tính tương tự như thuật toán Euclid
                 phi = e % phi;
                 e = t;
                 t = x0;
@@ -105,7 +105,7 @@ namespace RSA_Encrypt_Decrypt
                 x1 = t;
             }
 
-            // Make x1 positive if it's negative
+            // cho x1 dương nếu nó âm
             if (x1 < 0)
                 x1 += m0;
 
